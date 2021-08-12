@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { Avatar, IconButton } from "@material-ui/core";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
+import { useCollection } from "react-firebase-hooks/firestore"
+import { db } from "../firebase"
 
 
 function ChatScreen({ chat, messages }) {
@@ -13,7 +15,7 @@ function ChatScreen({ chat, messages }) {
   const router = useRouter();
 
   const showMessages = () => {
-
+    
   }
 
   return (
