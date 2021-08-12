@@ -1,21 +1,19 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Sidebar from './Sidebar'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Whatsapp</title>
         <meta name="description" content="Building the chatting app whatsapp" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Lets build Whatsapp
-        </h1>
+  
+      <Sidebar />
+        
 
-       </main>
     </div>
   )
 }
