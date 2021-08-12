@@ -5,6 +5,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ChatIcon from '@material-ui/icons/Chat';
 import SearchIcon from '@material-ui/icons/Search';
 import * as EmailValidator from "email-validator";
+import { auth } from "../firebase"
 
 export default function Sidebar() {
 
@@ -24,7 +25,7 @@ export default function Sidebar() {
     return (
         <Container>
             <Header>
-                <UserAvatar />
+                <UserAvatar onClick={()=> {auth.signOut()}}/>
                 <IconContainer>
                 <IconButton>
                     <ChatIcon />
