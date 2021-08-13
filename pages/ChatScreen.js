@@ -14,6 +14,7 @@ import MicIcon from "@material-ui/icons/Mic";
 import { useState } from "react"
 import firebase from "firebase"
 import getRecipientEmail from "../utils/getRecipientEmail"
+import TimeAgo from "timeago-react"
 
 function ChatScreen({ chat, messages }) {
   console.log(chat)
@@ -74,38 +75,49 @@ function ChatScreen({ chat, messages }) {
 
   return (
     <Container>
-      <Header>
-      {recipient?
-        <Avatar src={recipient?.photoURL}/>
-        :
-        <Avatar> {recipientEmail[0].toUpperCase()} </Avatar>
-      }
-        <HeaderInformation>
-          <h3>{recipientEmail}</h3>
-          <p>LAST SEEN ...</p>
-        </HeaderInformation>
-        <HeaderIcons>
-          <IconButton>
-            <AttachFileIcon />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton>
-        </HeaderIcons>
-      </Header>
 
-      <MessageContainer>
-        {showMessages()}
-        <EndMessage />
-      </MessageContainer>
-      <InputContainer>
-        <InsertEmoticonIcon />
-        <Input value={input} onChange={(e)=> {setInput(e.target.value)}}/>
-        <button hidden disabled={!input} onClick={sendMessage} type="submit" >Send Message</button>
-        <MicIcon />
-      </InputContainer>
-    </Container>
-  );
+          <Header>
+          {recipient?
+            <Avatar src={recipient?.photoURL}/>
+            :
+            <Avatar> {recipientEmail[0].toUpperCase()} </Avatar>
+          }
+            <HeaderInformation>
+              <h3>{recipientEmail}</h3>
+              {recipientSnapshot ? (
+              <p>Last active: {' '} 
+              {recipient?.lastSeen?.toDate() ? (
+                <TimeAgo datetime={recipient?.lastSeen?.toDate()} />
+              ) : (
+              "Unavailable"
+              )}
+              </p>
+              ): (
+                <p>Loading last active...</p>
+              )}
+            </HeaderInformation>
+            <HeaderIcons>
+              <IconButton>
+                <AttachFileIcon />
+              </IconButton>
+              <IconButton>
+                <MoreVertIcon />
+              </IconButton>
+            </HeaderIcons>
+          </Header>
+
+          <MessageContainer>
+            {showMessages()}
+            <EndMessage />
+          </MessageContainer>
+          <InputContainer>
+            <InsertEmoticonIcon />
+            <Input value={input} onChange={(e)=> {setInput(e.target.value)}}/>
+            <button hidden disabled={!input} onClick={sendMessage} type="submit" >Send Message</button>
+            <MicIcon />
+          </InputContainer>
+  </Container>
+  )
 }
 
 export default ChatScreen;
